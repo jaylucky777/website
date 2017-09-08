@@ -1,0 +1,17 @@
+---
+title: "SQL"
+output: html_document
+---
+```{r warning=FALSE,message=FALSE}
+library(Lahman)
+library(sqldf)
+```
+##ORDER BY
+With SQL, you can also order the rows of your output.  Suppose we would like to see all instances of a playe hitting more than 50 home runs.  But we would like the players with the most homeruns to be at the top.  We could do the following:
+
+```{r message=FALSE, warning=FALSE}
+query<-"SELECT playerID,yearID,teamID,HR FROM Batting 
+WHERE HR>50 
+ORDER BY HR DESC"
+sqldf(query)
+```
