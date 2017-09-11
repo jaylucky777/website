@@ -115,7 +115,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">SQL</h1>
+<h1 class="title toc-ignore"><span style="color:red">SQL</span></h1>
 
 </div>
 
@@ -160,7 +160,7 @@ sqldf(query)</code></pre>
 <div id="section" class="section level1">
 <h1>——————————————</h1>
 <div id="ny-yankees-with-40-or-more-homeruns" class="section level3">
-<h3>NY Yankees with 40 or more Homeruns</h3>
+<h3><span style="color:red">NY Yankees with 40 or more Homeruns</span></h3>
 <p>Moving on we can query out which NY Yankees players hit 40 or more homeruns with the following code:</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,yearID,teamID,HR FROM Batting WHERE teamID='NYA' and HR&gt;=40&quot;
 sqldf(query)</code></pre>
@@ -200,7 +200,7 @@ sqldf(query)</code></pre>
 <div id="section-1" class="section level1">
 <h1>——————————————</h1>
 <div id="strike-outs-and-homeruns" class="section level3">
-<h3>Strike Outs and Homeruns</h3>
+<h3><span style="color:red">Strike Outs and Homeruns</span></h3>
 <p>Adding the Strike Outs into the query we can further filter out which players hit over 40 homeruns AND had less than 60 strike outs with the following:</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR,SO FROM Batting WHERE HR&gt;40 and SO&lt;60&quot;
 sqldf(query)</code></pre>
@@ -238,7 +238,7 @@ sqldf(query)</code></pre>
 <div id="section-2" class="section level1">
 <h1>——————————————</h1>
 <div id="team-filter" class="section level3">
-<h3>Team Filter</h3>
+<h3><span style="color:red">Team Filter</span></h3>
 <p>Finally we’re filtering all the teams to just the Phillies, query the years in the 1970’s (using a range), and finally extract the players with more than 30 homeruns.</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR FROM Batting WHERE teamID='PHI' and yearID&gt;=1970 and yearID&lt;=1979 and HR&gt;30&quot;
 sqldf(query)</code></pre>
@@ -257,7 +257,7 @@ sqldf(query)</code></pre>
 <div id="section-3" class="section level1">
 <h1>——————————————</h1>
 <div id="order-by" class="section level3">
-<h3>ORDER BY</h3>
+<h3><span style="color:red">ORDER BY</span></h3>
 <p>This filter extracts every instance of a player hitting more than 50 homeruns. Furthermore, let’s have the players with the highest homerun total at the top.</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,yearID,teamID,HR FROM Batting 
 WHERE HR&gt;50 
@@ -305,7 +305,7 @@ sqldf(query)</code></pre>
 <div id="section-4" class="section level1">
 <h1>——————————————</h1>
 <div id="filtering-strike-outs-less-than-10-and-at-bat-400-or-more" class="section level3">
-<h3>Filtering Strike Outs (Less than 10) and At Bat (400 or more)</h3>
+<h3><span style="color:red">Filtering Strike Outs (Less than 10) and At Bat (400 or more)</span></h3>
 <p>This filter extracts every instance of a player strike out less than 10 times; however, they need to be at bat atleast 400 times.</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,yearID,teamID,SO,HR,AB FROM Batting 
 WHERE SO&lt;10 and AB&gt;=400
@@ -382,7 +382,7 @@ sqldf(query)</code></pre>
 <div id="section-5" class="section level1">
 <h1>——————————————</h1>
 <div id="group-by-filter" class="section level3">
-<h3>Group By Filter</h3>
+<h3><span style="color:red">Group By Filter</span></h3>
 <p>We will be grouping (summating) all of Babe Ruth’s career homeruns using the group by function.</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID, sum(HR) FROM Batting 
 WHERE playerID='ruthba01'
@@ -395,7 +395,7 @@ sqldf(query)</code></pre>
 <div id="section-6" class="section level1">
 <h1>——————————————</h1>
 <div id="summing-all-players-with-homeruns-over-600-in-descending-order" class="section level3">
-<h3>Summing all players with Homeruns over 600 in descending order</h3>
+<h3><span style="color:red">Summing all players with Homeruns over 600 in descending order</span></h3>
 <p>We will be grouping (summating) all of a players career homeruns using the group by function and place it in descending order.</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID, sum(HR) FROM Batting 
 GROUP BY playerID
@@ -416,7 +416,7 @@ sqldf(query)</code></pre>
 <div id="section-7" class="section level1">
 <h1>——————————————</h1>
 <div id="averaging-homeruns" class="section level3">
-<h3>Averaging Homeruns</h3>
+<h3><span style="color:red">Averaging Homeruns</span></h3>
 <p>We will be grouping all the players with average homeruns greater than 30 in descending order.</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID, avg(HR) FROM Batting 
 GROUP BY playerID

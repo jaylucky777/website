@@ -1,5 +1,5 @@
 ---
-title: "SQL"
+title: <span style="color:red">SQL</span>
 output: html_document
 ---
 ```{r warning=FALSE,message=FALSE}
@@ -7,7 +7,7 @@ library(Lahman)
 library(sqldf)
 ```
 ---
-title: "SQL"
+title: "SQL" 
 output: html_document
 ---
 ## Filtering Rows and Columns
@@ -26,7 +26,7 @@ query<-"SELECT playerID,teamID,yearID,HR FROM Batting WHERE teamID='NYA' and yea
 sqldf(query)
 ```
 #------------------------------------------
-###NY Yankees with 40 or more Homeruns
+###<span style="color:red">NY Yankees with 40 or more Homeruns</span>
 Moving on we can query out which NY Yankees players hit 40 or more homeruns with the following code:
 
 ```{r message=FALSE, warning=FALSE, comment=NA}
@@ -34,7 +34,7 @@ query<-"SELECT playerID,yearID,teamID,HR FROM Batting WHERE teamID='NYA' and HR>
 sqldf(query)
 ```
 #------------------------------------------
-###Strike Outs and Homeruns
+###<span style="color:red">Strike Outs and Homeruns</span>
 Adding the Strike Outs into the query we can further filter out which players hit over 40 homeruns AND had less than 60 strike outs with the following:
 
 ```{r message=FALSE, warning=FALSE, comment=NA}
@@ -42,7 +42,7 @@ query<-"SELECT playerID,teamID,yearID,HR,SO FROM Batting WHERE HR>40 and SO<60"
 sqldf(query)
 ```
 #------------------------------------------
-###Team Filter
+###<span style="color:red">Team Filter</span>
 Finally we're filtering all the teams to just the Phillies, query the years in the 1970's (using a range), and finally extract the players with more than 30 homeruns.
 
 ```{r message=FALSE, warning=FALSE, comment=NA}
@@ -50,7 +50,7 @@ query<-"SELECT playerID,teamID,yearID,HR FROM Batting WHERE teamID='PHI' and yea
 sqldf(query)
 ```
 #------------------------------------------
-### ORDER BY
+###<span style="color:red">ORDER BY</span>
 
 This filter extracts every instance of a player hitting more than 50 homeruns.  Furthermore, let's have the players with the highest homerun total at the top.
 
@@ -61,7 +61,7 @@ ORDER BY HR DESC"
 sqldf(query)
 ```
 #------------------------------------------
-### Filtering Strike Outs (Less than 10) and At Bat (400 or more)
+###<span style="color:red">Filtering Strike Outs (Less than 10) and At Bat (400 or more)</span>
 
 This filter extracts every instance of a player strike out less than 10 times; however, they need to be at bat atleast 400 times.
 
@@ -72,7 +72,7 @@ ORDER BY SO DESC"
 sqldf(query)
 ```
 #------------------------------------------
-### Group By Filter
+###<span style="color:red">Group By Filter</span>
 
 We will be grouping (summating) all of Babe Ruth's career homeruns using the group by function.
 
@@ -83,7 +83,7 @@ GROUP BY playerID"
 sqldf(query)
 ```
 #------------------------------------------
-### Summing all players with Homeruns over 600 in descending order
+###<span style="color:red">Summing all players with Homeruns over 600 in descending order</span>
 
 We will be grouping (summating) all of a players career homeruns using the group by function and place it in descending order.
 
@@ -95,7 +95,7 @@ ORDER BY HR DESC"
 sqldf(query)
 ```
 #------------------------------------------
-### Averaging Homeruns
+###<span style="color:red">Averaging Homeruns</span>
 
 We will be grouping all the players with average homeruns greater than 30 in descending order.
 
