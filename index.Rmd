@@ -6,11 +6,8 @@ output: html_document
 library(Lahman)
 library(sqldf)
 ```
----
-title: "SQL" 
-output: html_document
----
-## Filtering Rows and Columns
+
+###<span style="color:red">Filtering Rows and Columns</span>
 
 In SQL you can filter columns by using SELECT and rows by using WHERE.  Let's look at an example using the Lahman baseball database.  First, we should load the Lahman package.  We will also need the sqldf package.
 
