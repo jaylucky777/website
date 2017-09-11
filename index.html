@@ -159,8 +159,8 @@ sqldf(query)</code></pre>
 </div>
 <div id="section" class="section level1">
 <h1>——————————————</h1>
-<div id="ny-yankees-with-40-or-more-homeruns" class="section level2">
-<h2>NY Yankees with 40 or more Homeruns</h2>
+<div id="ny-yankees-with-40-or-more-homeruns" class="section level3">
+<h3>NY Yankees with 40 or more Homeruns</h3>
 <p>Moving on we can query out which NY Yankees players hit 40 or more homeruns with the following code:</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,yearID,teamID,HR FROM Batting WHERE teamID='NYA' and HR&gt;=40&quot;
 sqldf(query)</code></pre>
@@ -199,8 +199,8 @@ sqldf(query)</code></pre>
 </div>
 <div id="section-1" class="section level1">
 <h1>——————————————</h1>
-<div id="strike-outs-and-homeruns" class="section level2">
-<h2>Strike Outs and Homeruns</h2>
+<div id="strike-outs-and-homeruns" class="section level3">
+<h3>Strike Outs and Homeruns</h3>
 <p>Adding the Strike Outs into the query we can further filter out which players hit over 40 homeruns AND had less than 60 strike outs with the following:</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR,SO FROM Batting WHERE HR&gt;40 and SO&lt;60&quot;
 sqldf(query)</code></pre>
@@ -237,8 +237,8 @@ sqldf(query)</code></pre>
 </div>
 <div id="section-2" class="section level1">
 <h1>——————————————</h1>
-<div id="team-filter" class="section level2">
-<h2>Team Filter</h2>
+<div id="team-filter" class="section level3">
+<h3>Team Filter</h3>
 <p>Finally we’re filtering all the teams to just the Phillies, query the years in the 1970’s (using a range), and finally extract the players with more than 30 homeruns.</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR FROM Batting WHERE teamID='PHI' and yearID&gt;=1970 and yearID&lt;=1979 and HR&gt;30&quot;
 sqldf(query)</code></pre>
@@ -256,54 +256,9 @@ sqldf(query)</code></pre>
 </div>
 <div id="section-3" class="section level1">
 <h1>——————————————</h1>
-<div id="order-by" class="section level2">
-<h2>ORDER BY</h2>
+<div id="order-by" class="section level3">
+<h3>ORDER BY</h3>
 <p>This filter extracts every instance of a player hitting more than 50 homeruns. Furthermore, let’s have the players with the highest homerun total at the top.</p>
-<pre class="r"><code>query&lt;-&quot;SELECT playerID,yearID,teamID,HR FROM Batting 
-WHERE HR&gt;50 
-ORDER BY HR DESC&quot;
-sqldf(query)</code></pre>
-<pre><code>##     playerID yearID teamID HR
-## 1  bondsba01   2001    SFN 73
-## 2  mcgwima01   1998    SLN 70
-## 3   sosasa01   1998    CHN 66
-## 4  mcgwima01   1999    SLN 65
-## 5   sosasa01   2001    CHN 64
-## 6   sosasa01   1999    CHN 63
-## 7  marisro01   1961    NYA 61
-## 8   ruthba01   1927    NYA 60
-## 9   ruthba01   1921    NYA 59
-## 10  foxxji01   1932    PHA 58
-## 11 greenha01   1938    DET 58
-## 12 howarry01   2006    PHI 58
-## 13 gonzalu01   2001    ARI 57
-## 14 rodrial01   2002    TEX 57
-## 15 wilsoha01   1930    CHN 56
-## 16 griffke02   1997    SEA 56
-## 17 griffke02   1998    SEA 56
-## 18  ruthba01   1920    NYA 54
-## 19  ruthba01   1928    NYA 54
-## 20 kinerra01   1949    PIT 54
-## 21 mantlmi01   1961    NYA 54
-## 22 ortizda01   2006    BOS 54
-## 23 rodrial01   2007    NYA 54
-## 24 bautijo02   2010    TOR 54
-## 25 davisch02   2013    BAL 53
-## 26 mantlmi01   1956    NYA 52
-## 27  mayswi01   1965    SFN 52
-## 28 fostege01   1977    CIN 52
-## 29 mcgwima01   1996    OAK 52
-## 30 rodrial01   2001    TEX 52
-## 31 thomeji01   2002    CLE 52
-## 32 kinerra01   1947    PIT 51
-## 33  mizejo01   1947    NY1 51
-## 34  mayswi01   1955    NY1 51
-## 35 fieldce01   1990    DET 51
-## 36 jonesan01   2005    ATL 51</code></pre>
-</div>
-<div id="order-by-1" class="section level2">
-<h2>ORDER BY</h2>
-<p>With SQL, you can also order the rows of your output. Suppose we would like to see all instances of a playe hitting more than 50 home runs. But we would like the players with the most homeruns to be at the top. We could do the following:</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,yearID,teamID,HR FROM Batting 
 WHERE HR&gt;50 
 ORDER BY HR DESC&quot;

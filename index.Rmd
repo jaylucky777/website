@@ -27,7 +27,7 @@ query<-"SELECT playerID,teamID,yearID,HR FROM Batting WHERE teamID='NYA' and yea
 sqldf(query)
 ```
 #------------------------------------------
-##NY Yankees with 40 or more Homeruns
+###NY Yankees with 40 or more Homeruns
 Moving on we can query out which NY Yankees players hit 40 or more homeruns with the following code:
 
 ```{r message=FALSE, warning=FALSE}
@@ -35,7 +35,7 @@ query<-"SELECT playerID,yearID,teamID,HR FROM Batting WHERE teamID='NYA' and HR>
 sqldf(query)
 ```
 #------------------------------------------
-##Strike Outs and Homeruns
+###Strike Outs and Homeruns
 Adding the Strike Outs into the query we can further filter out which players hit over 40 homeruns AND had less than 60 strike outs with the following:
 
 ```{r message=FALSE, warning=FALSE}
@@ -43,7 +43,7 @@ query<-"SELECT playerID,teamID,yearID,HR,SO FROM Batting WHERE HR>40 and SO<60"
 sqldf(query)
 ```
 #------------------------------------------
-##Team Filter
+###Team Filter
 Finally we're filtering all the teams to just the Phillies, query the years in the 1970's (using a range), and finally extract the players with more than 30 homeruns.
 
 ```{r message=FALSE, warning=FALSE}
@@ -51,19 +51,9 @@ query<-"SELECT playerID,teamID,yearID,HR FROM Batting WHERE teamID='PHI' and yea
 sqldf(query)
 ```
 #------------------------------------------
-## ORDER BY
+### ORDER BY
 
 This filter extracts every instance of a player hitting more than 50 homeruns.  Furthermore, let's have the players with the highest homerun total at the top.
-
-```{r message=FALSE, warning=FALSE}
-query<-"SELECT playerID,yearID,teamID,HR FROM Batting 
-WHERE HR>50 
-ORDER BY HR DESC"
-sqldf(query)
-```
-
-##ORDER BY
-With SQL, you can also order the rows of your output.  Suppose we would like to see all instances of a playe hitting more than 50 home runs.  But we would like the players with the most homeruns to be at the top.  We could do the following:
 
 ```{r message=FALSE, warning=FALSE}
 query<-"SELECT playerID,yearID,teamID,HR FROM Batting 
