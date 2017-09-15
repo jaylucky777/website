@@ -105,7 +105,7 @@ sqldf(query)
 ```
 
 #------------------------------------------
-###<span style="color:red">Averaging Homeruns</span>
+###<span style="color:red">First and Last Name</span>
 
 >First and last name listing for Babe Ruth with concatennated tables.
 
@@ -118,7 +118,7 @@ sqldf(query)
 ```
 
 #------------------------------------------
-###<span style="color:red">Averaging Homeruns</span>
+###<span style="color:red">Over 50 Homeruns with Names and Years</span>
 
 >All instances of players hitting more than 50 homeruns, listed by first and last name, team, year, and homeruns.
 
@@ -131,15 +131,59 @@ ORDER BY HR DESC"
 sqldf(query)
 ```
 #------------------------------------------
-###<span style="color:red">Averaging Homeruns</span>
+###<span style="color:red">Babe Ruth by Team, Year, and Homeruns</span>
 
->All instances of players hitting more than 50 homeruns, listed by first and last name, team, year, and homeruns.  We will be listing the team name and not the teamID for this one.  Babe Ruth will be the specific player.
+>All instances of Babe Ruth by team, year, and homeruns, concatennating two different tables.
 
 ```{r message=FALSE, warning=FALSE, comment=NA}
-query<-"SELECT nameFirst,nameLast,team.name,yearID,HR FROM Batting
-INNER JOIN Master
+query<-"SELECT playerID,name,Batting.yearID,Batting.HR
+FROM Batting INNER JOIN Teams
+ON Batting.teamID=Teams.teamID and Batting.yearID=Teams.yearID
+WHERE playerID='ruthba01'"
+sqldf(query)
+```
+
+#------------------------------------------
+###<span style="color:red">Babe Ruth by Name and Teams Played in</span>
+
+In this query we concatennate multiple tables and are able to get Babe Ruth's name instead of a code representing Babe Ruth.  We are also able to do the same with all of the teams he has been on.
+```{r message=FALSE, warning=FALSE, comment=NA}
+query<-"SELECT nameFirst,nameLast,name,Batting.yearID,Batting.HR
+FROM (Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID) INNER JOIN Teams
+ON Batting.teamID=Teams.teamID AND Batting.yearID=Teams.yearID
+WHERE Batting.playerID='ruthba01'"
+
+sqldf(query)
+```
+
+#------------------------------------------------------------------
+
+###<span style="color:red">All Players with over 600 Career Homeruns in Descending Order</span>
+>For this query we are grouping all players with over 600 career homeruns, and put them in descending order.
+
+```{r message=FALSE, warning=FALSE, comment=NA}
+query<-"SELECT nameFirst,nameLast,Sum(HR)
+FROM Batting INNER JOIN Master
 ON Batting.playerID=Master.playerID
-WHERE HR>50
-ORDER BY HR DESC"
+GROUP BY Batting.playerID
+HAVING Sum(Batting.HR)>=600
+ORDER BY Sum(Batting.HR) DESC"
+
+sqldf(query)
+```
+#------------------------------------------------------------------
+
+###<span style="color:red">All Players with an Average Salary over one million USD...and named Bob</span>
+>This is an interesting query where we concatennate two tables using the Salaries table for the first time.  We get all players averaging over one million USD.  The real kicker is that we are also filtering out all those without the name "Bob".
+
+```{r message=FALSE, warning=FALSE, comment=NA}
+query<-"SELECT nameFirst,nameLast,avg(salary)
+FROM Salaries INNER JOIN Master
+ON Salaries.playerID=Master.playerID
+WHERE nameFirst='Bob'
+GROUP BY Salaries.playerID
+HAVING Avg(Salary)>1000000
+ORDER BY Avg(Salary) DESC"
 sqldf(query)
 ```

@@ -461,8 +461,8 @@ sqldf(query)</code></pre>
 </div>
 <div id="section-8" class="section level1">
 <h1>——————————————</h1>
-<div id="averaging-homeruns-1" class="section level3">
-<h3><span style="color:red">Averaging Homeruns</span></h3>
+<div id="first-and-last-name" class="section level3">
+<h3><span style="color:red">First and Last Name</span></h3>
 <blockquote>
 <p>First and last name listing for Babe Ruth with concatennated tables.</p>
 </blockquote>
@@ -498,59 +498,180 @@ sqldf(query)</code></pre>
 </div>
 <div id="section-9" class="section level1">
 <h1>——————————————</h1>
-<div id="averaging-homeruns-2" class="section level3">
-<h3><span style="color:red">Averaging Homeruns</span></h3>
+<div id="over-50-homeruns-with-names-and-years" class="section level3">
+<h3><span style="color:red">Over 50 Homeruns with Names and Years</span></h3>
 <blockquote>
 <p>All instances of players hitting more than 50 homeruns, listed by first and last name, team, year, and homeruns.</p>
 </blockquote>
 <pre class="r"><code>query&lt;-&quot;SELECT nameFirst,nameLast,teamID,yearID,HR FROM Batting
 INNER JOIN Master
 ON Batting.playerID=Master.playerID
-WHERE HR&gt;=50&quot;
+WHERE HR&gt;50
+ORDER BY HR DESC&quot;
 sqldf(query)</code></pre>
 <pre><code>   nameFirst  nameLast teamID yearID HR
-1       Babe      Ruth    NYA   1920 54
-2       Babe      Ruth    NYA   1921 59
-3       Babe      Ruth    NYA   1927 60
-4       Babe      Ruth    NYA   1928 54
-5       Hack    Wilson    CHN   1930 56
-6     Jimmie      Foxx    PHA   1932 58
-7     Jimmie      Foxx    BOS   1938 50
-8       Hank Greenberg    DET   1938 58
-9      Ralph     Kiner    PIT   1947 51
-10    Johnny      Mize    NY1   1947 51
-11     Ralph     Kiner    PIT   1949 54
-12    Willie      Mays    NY1   1955 51
-13    Mickey    Mantle    NYA   1956 52
-14    Mickey    Mantle    NYA   1961 54
-15     Roger     Maris    NYA   1961 61
-16    Willie      Mays    SFN   1965 52
-17    George    Foster    CIN   1977 52
-18     Cecil   Fielder    DET   1990 51
-19    Albert     Belle    CLE   1995 50
-20     Brady  Anderson    BAL   1996 50
-21      Mark   McGwire    OAK   1996 52
-22       Ken   Griffey    SEA   1997 56
-23       Ken   Griffey    SEA   1998 56
-24      Mark   McGwire    SLN   1998 70
-25     Sammy      Sosa    CHN   1998 66
-26      Greg    Vaughn    SDN   1998 50
-27      Mark   McGwire    SLN   1999 65
-28     Sammy      Sosa    CHN   1999 63
-29     Sammy      Sosa    CHN   2000 50
-30     Barry     Bonds    SFN   2001 73
-31      Luis  Gonzalez    ARI   2001 57
-32      Alex Rodriguez    TEX   2001 52
-33     Sammy      Sosa    CHN   2001 64
-34      Alex Rodriguez    TEX   2002 57
-35       Jim     Thome    CLE   2002 52
-36    Andruw     Jones    ATL   2005 51
-37      Ryan    Howard    PHI   2006 58
-38     David     Ortiz    BOS   2006 54
-39    Prince   Fielder    MIL   2007 50
-40      Alex Rodriguez    NYA   2007 54
-41      Jose  Bautista    TOR   2010 54
-42     Chris     Davis    BAL   2013 53</code></pre>
+1      Barry     Bonds    SFN   2001 73
+2       Mark   McGwire    SLN   1998 70
+3      Sammy      Sosa    CHN   1998 66
+4       Mark   McGwire    SLN   1999 65
+5      Sammy      Sosa    CHN   2001 64
+6      Sammy      Sosa    CHN   1999 63
+7      Roger     Maris    NYA   1961 61
+8       Babe      Ruth    NYA   1927 60
+9       Babe      Ruth    NYA   1921 59
+10    Jimmie      Foxx    PHA   1932 58
+11      Hank Greenberg    DET   1938 58
+12      Ryan    Howard    PHI   2006 58
+13      Luis  Gonzalez    ARI   2001 57
+14      Alex Rodriguez    TEX   2002 57
+15      Hack    Wilson    CHN   1930 56
+16       Ken   Griffey    SEA   1997 56
+17       Ken   Griffey    SEA   1998 56
+18      Babe      Ruth    NYA   1920 54
+19      Babe      Ruth    NYA   1928 54
+20     Ralph     Kiner    PIT   1949 54
+21    Mickey    Mantle    NYA   1961 54
+22     David     Ortiz    BOS   2006 54
+23      Alex Rodriguez    NYA   2007 54
+24      Jose  Bautista    TOR   2010 54
+25     Chris     Davis    BAL   2013 53
+26    Mickey    Mantle    NYA   1956 52
+27    Willie      Mays    SFN   1965 52
+28    George    Foster    CIN   1977 52
+29      Mark   McGwire    OAK   1996 52
+30      Alex Rodriguez    TEX   2001 52
+31       Jim     Thome    CLE   2002 52
+32     Ralph     Kiner    PIT   1947 51
+33    Johnny      Mize    NY1   1947 51
+34    Willie      Mays    NY1   1955 51
+35     Cecil   Fielder    DET   1990 51
+36    Andruw     Jones    ATL   2005 51</code></pre>
+</div>
+</div>
+<div id="section-10" class="section level1">
+<h1>——————————————</h1>
+<div id="babe-ruth-by-team-year-and-homeruns" class="section level3">
+<h3><span style="color:red">Babe Ruth by Team, Year, and Homeruns</span></h3>
+<blockquote>
+<p>All instances of Babe Ruth by team, year, and homeruns, concatennating two different tables.</p>
+</blockquote>
+<pre class="r"><code>query&lt;-&quot;SELECT playerID,name,Batting.yearID,Batting.HR
+FROM Batting INNER JOIN Teams
+ON Batting.teamID=Teams.teamID and Batting.yearID=Teams.yearID
+WHERE playerID='ruthba01'&quot;
+sqldf(query)</code></pre>
+<pre><code>   playerID             name yearID HR
+1  ruthba01   Boston Red Sox   1914  0
+2  ruthba01   Boston Red Sox   1915  4
+3  ruthba01   Boston Red Sox   1916  3
+4  ruthba01   Boston Red Sox   1917  2
+5  ruthba01   Boston Red Sox   1918 11
+6  ruthba01   Boston Red Sox   1919 29
+7  ruthba01 New York Yankees   1920 54
+8  ruthba01 New York Yankees   1921 59
+9  ruthba01 New York Yankees   1922 35
+10 ruthba01 New York Yankees   1923 41
+11 ruthba01 New York Yankees   1924 46
+12 ruthba01 New York Yankees   1925 25
+13 ruthba01 New York Yankees   1926 47
+14 ruthba01 New York Yankees   1927 60
+15 ruthba01 New York Yankees   1928 54
+16 ruthba01 New York Yankees   1929 46
+17 ruthba01 New York Yankees   1930 49
+18 ruthba01 New York Yankees   1931 46
+19 ruthba01 New York Yankees   1932 41
+20 ruthba01 New York Yankees   1933 34
+21 ruthba01 New York Yankees   1934 22
+22 ruthba01    Boston Braves   1935  6</code></pre>
+</div>
+</div>
+<div id="section-11" class="section level1">
+<h1>——————————————</h1>
+<div id="babe-ruth-by-name-and-teams-played-in" class="section level3">
+<h3><span style="color:red">Babe Ruth by Name and Teams Played in</span></h3>
+<p>In this query we concatennate multiple tables and are able to get Babe Ruth’s name instead of a code representing Babe Ruth. We are also able to do the same with all of the teams he has been on.</p>
+<pre class="r"><code>query&lt;-&quot;SELECT nameFirst,nameLast,name,Batting.yearID,Batting.HR
+FROM (Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID) INNER JOIN Teams
+ON Batting.teamID=Teams.teamID AND Batting.yearID=Teams.yearID
+WHERE Batting.playerID='ruthba01'&quot;
+
+sqldf(query)</code></pre>
+<pre><code>   nameFirst nameLast             name yearID HR
+1       Babe     Ruth   Boston Red Sox   1914  0
+2       Babe     Ruth   Boston Red Sox   1915  4
+3       Babe     Ruth   Boston Red Sox   1916  3
+4       Babe     Ruth   Boston Red Sox   1917  2
+5       Babe     Ruth   Boston Red Sox   1918 11
+6       Babe     Ruth   Boston Red Sox   1919 29
+7       Babe     Ruth New York Yankees   1920 54
+8       Babe     Ruth New York Yankees   1921 59
+9       Babe     Ruth New York Yankees   1922 35
+10      Babe     Ruth New York Yankees   1923 41
+11      Babe     Ruth New York Yankees   1924 46
+12      Babe     Ruth New York Yankees   1925 25
+13      Babe     Ruth New York Yankees   1926 47
+14      Babe     Ruth New York Yankees   1927 60
+15      Babe     Ruth New York Yankees   1928 54
+16      Babe     Ruth New York Yankees   1929 46
+17      Babe     Ruth New York Yankees   1930 49
+18      Babe     Ruth New York Yankees   1931 46
+19      Babe     Ruth New York Yankees   1932 41
+20      Babe     Ruth New York Yankees   1933 34
+21      Babe     Ruth New York Yankees   1934 22
+22      Babe     Ruth    Boston Braves   1935  6</code></pre>
+</div>
+</div>
+<div id="section-12" class="section level1">
+<h1>——————————————————————</h1>
+<div id="all-players-with-over-600-career-homeruns-in-descending-order" class="section level3">
+<h3><span style="color:red">All Players with over 600 Career Homeruns in Descending Order</span></h3>
+<blockquote>
+<p>For this query we are grouping all players with over 600 career homeruns, and put them in descending order.</p>
+</blockquote>
+<pre class="r"><code>query&lt;-&quot;SELECT nameFirst,nameLast,Sum(HR)
+FROM Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID
+GROUP BY Batting.playerID
+HAVING Sum(Batting.HR)&gt;=600
+ORDER BY Sum(Batting.HR) DESC&quot;
+
+sqldf(query)</code></pre>
+<pre><code>  nameFirst  nameLast Sum(HR)
+1     Barry     Bonds     762
+2      Hank     Aaron     755
+3      Babe      Ruth     714
+4      Alex Rodriguez     696
+5    Willie      Mays     660
+6       Ken   Griffey     630
+7       Jim     Thome     612
+8     Sammy      Sosa     609</code></pre>
+</div>
+</div>
+<div id="section-13" class="section level1">
+<h1>——————————————————————</h1>
+<div id="all-players-with-an-average-salary-over-one-million-usdand-named-bob" class="section level3">
+<h3><span style="color:red">All Players with an Average Salary over one million USD…and named Bob</span></h3>
+<blockquote>
+<p>This is an interesting query where we concatennate two tables using the Salaries table for the first time. We get all players averaging over one million USD. The real kicker is that we are also filtering out all those without the name “Bob”.</p>
+</blockquote>
+<pre class="r"><code>query&lt;-&quot;SELECT nameFirst,nameLast,avg(salary)
+FROM Salaries INNER JOIN Master
+ON Salaries.playerID=Master.playerID
+WHERE nameFirst='Bob'
+GROUP BY Salaries.playerID
+HAVING Avg(Salary)&gt;1000000
+ORDER BY Avg(Salary) DESC&quot;
+sqldf(query)</code></pre>
+<pre><code>  nameFirst  nameLast avg(salary)
+1       Bob   Wickman     2635813
+2       Bob     Welch     1930417
+3       Bob     Howry     1804583
+4       Bob    Horner     1416667
+5       Bob Tewksbury     1288182
+6       Bob   Stanley     1067500
+7       Bob     Boone     1047580
+8       Bob     Ojeda     1035926</code></pre>
 </div>
 </div>
 
